@@ -2,34 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class Bank : MonoBehaviour, IService
+public class Bank : MonoBehaviour
 {
     [SerializeField] private BankView _bankView;
-
-    private HolderMoney _holderMoney;
-    private HolderBank _holderBank;
-
-    private void Awake()
-    {
-        ServiceLocator.Current.Register<Bank>(this);
-    }
+    [SerializeField] private MoneyHolder _moneyHolder;
+    
+    private BankHolder _bankHolder;
 
     private void Start()
     {
-        _holderMoney = ServiceLocator.Current.Get<HolderMoney>();
-        _holderBank = ServiceLocator.Current.Get<HolderBank>();
+        _bankHolder = ServiceLocator.Current.Get<BankHolder>();
     }
 
     public void DisplayTextMoney()
     {
-        _bankView.DisplayTextMoney(_holderBank.Money);
+        _bankView.DisplayTextMoney(_bankHolder.Money);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != Constants.Tags.PLAYER_TAG) return;
-        _holderMoney.Money += _holderBank.Money;
-        _holderBank.Money = 0;
+        if (other.tag != Constants.Tags.PLAYER) return;
+        _moneyHolder.SetMoney(_moneyHolder.GetMoney() + _bankHolder.Money);
+        _bankHolder.Money = 0;
         DisplayTextMoney();
     }
 }

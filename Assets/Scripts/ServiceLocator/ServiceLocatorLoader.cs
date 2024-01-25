@@ -4,20 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ServiceLocatorLoader : MonoBehaviour
 {
-    private HolderMoney _holderMoney;
-    private HolderBank _holderBank;
-
+    private BankHolder _bankHolder;
     private void Awake()
     {
-        _holderMoney = new HolderMoney();
-        _holderBank = new HolderBank();
+        _bankHolder = new BankHolder();
 
         Registers();
     }
 
     private void Registers()
     {
-        ServiceLocator.Current.Register<HolderMoney>(_holderMoney);
-        ServiceLocator.Current.Register<HolderBank>(_holderBank);
+        ServiceLocator.Current.Register<BankHolder>(_bankHolder);
     }
 }

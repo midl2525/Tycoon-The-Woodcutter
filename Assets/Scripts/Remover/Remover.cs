@@ -4,23 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Remover : MonoBehaviour
 {
-    private HolderBank _holderBank;
+    [SerializeField] private Bank _bank;
+
+    private BankHolder _bankHolder;
 
     private void Start()
     {
-        _holderBank = ServiceLocator.Current.Get<HolderBank>();
+        _bankHolder = ServiceLocator.Current.Get<BankHolder>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != Constants.Tags.ITEM_TAG) return;
+        if (other.tag != Constants.Tags.ITEM) return;
 
         BaseItem baseItem = other.GetComponent<BaseItem>();
 
         baseItem.CustomPool.Release(baseItem);
 
-        _holderBank.Money += baseItem.Price;
+        _bankHolder.Money += baseItem.Price;
 
-        ServiceLocator.Current.Get<Bank>().DisplayTextMoney();
+        _bank.DisplayTextMoney();
     }
 }

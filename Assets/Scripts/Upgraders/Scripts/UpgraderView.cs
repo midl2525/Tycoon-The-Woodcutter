@@ -11,6 +11,6 @@ public class UpgraderView : MonoBehaviour
     public void DisplayTexts(string text, int count)
     {
         _textName.text = text;
-        _textPrice.text = count + Constants.Symbols.MONEY_SYMBOL;
+        _textPrice.text = count + Constants.Symbols.MONEY;
     }
 }

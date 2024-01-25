@@ -11,6 +11,8 @@ public class Upgrader : MonoBehaviour
     [SerializeField] private GameObject _upgrader;
     [SerializeField] private UpgraderView _upgraderView;
 
+    [SerializeField] private MoneyHolder _moneyHolder;
+
     private void Start()
     {
         _upgraderView.DisplayTexts(_name, _price);
@@ -18,13 +20,11 @@ public class Upgrader : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        HolderMoney holderMoney = ServiceLocator.Current.Get<HolderMoney>();
+        if (other.tag != Constants.Tags.PLAYER) return;
 
-        if (other.tag != Constants.Tags.PLAYER_TAG) return;
+        if (_moneyHolder.GetMoney() < _price) return;
 
-        if (holderMoney.Money < _price) return;
-
-        holderMoney.Money -= _price;
+        _moneyHolder.SetMoney(_moneyHolder.GetMoney() - _price);
 
         foreach (var item in _objects)
         {

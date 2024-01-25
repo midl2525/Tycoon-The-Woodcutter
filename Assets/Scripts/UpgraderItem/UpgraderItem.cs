@@ -6,7 +6,7 @@ public class UpgraderItem : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != Constants.Tags.ITEM_TAG) return;
+        if (other.tag != Constants.Tags.ITEM) return;
 
         BaseItem baseItem = other.GetComponent<BaseItem>();
 
