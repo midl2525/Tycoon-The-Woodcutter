@@ -6,13 +6,18 @@ public static class Constants
 {
     public static class Tags
     {
-        public const string PLAYER_TAG = "Player";
-        public const string ITEM_TAG = "Item";
+        public const string PLAYER = "Player";
+        public const string ITEM = "Item";
     }
 
     public static class Symbols
     {
-        public const string MONEY_SYMBOL = "$";
+        public const string MONEY = "$";
+    }
+
+    public static class SaveNames
+    {
+        public const string MONEY = "Money";
     }
 
 }
